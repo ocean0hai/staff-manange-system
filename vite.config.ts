@@ -11,7 +11,7 @@ export default defineConfig({
     vue(),
     UnoCSS(),
     viteMockServe({
-      mockPath: "./mock/", //设置模拟数据的存储文件夹
+      mockPath: "./mock", //设置模拟数据的存储文件夹
       //@ts-ignore
       supportTs: true, //是否读取ts文件模块
       logger: true, //是否在控制台显示请求日志

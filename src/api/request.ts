@@ -1,5 +1,6 @@
 import axios from "axios";
-
+import { useMessage } from "naive-ui";
+const messsage = useMessage();
 const url = import.meta.env.BASE_URL;
 const api = axios.create({
   baseURL: url,
@@ -17,9 +18,10 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
   (res) => {
-    console.log(res);
-
-    return res.data;
+    if (res.status === 200) {
+      return res.data;
+    }
+    messsage.error(res.statusText);
   },
   (err) => {
     console.log(err);

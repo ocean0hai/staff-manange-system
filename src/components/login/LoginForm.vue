@@ -38,7 +38,7 @@
       >
         登录
       </n-button>
-      <div class="text-right text-blue-500">注册></div>
+      <slot></slot>
     </n-space>
   </n-form>
 </template>

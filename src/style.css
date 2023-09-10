@@ -1,0 +1,14 @@
+.centerbox {
+  width: 350px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /*-webkit 是表示针对 safari 浏览器支持，-ms表示针对 IE 浏览器支持*/
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 20px;
+  z-index: 90;
+}

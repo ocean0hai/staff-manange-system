@@ -1,29 +1,39 @@
-import type { MockMethod } from 'vite-plugin-mock'
-import Mock from 'mockjs'
-
-const mock:MockMethod[] = [
+import type { MockMethod } from "vite-plugin-mock";
+import { Random } from "mockjs";
+interface objType {
+  [key: string]: any;
+}
+const user = {
+  id: "1",
+  username: "2",
+  status: "3",
+  time: "4",
+};
+// type Mapping<Obj extends object> = {
+//   [Key in keyof Obj]: Obj[Key];
+// };
+function craeteData(obj: objType) {
+  const data = [];
+  for (let i = 0; i < 10; i++) {
+    for (let key in obj) {
+      obj[key] = i + "";
+    }
+    data.push({
+      ...obj,
+    });
+  }
+}
+const mock: MockMethod[] = [
   //这里应该是做拦截的方法api集合
-  //拦截获取数据的请求
+  //用户信息接口
   {
-    url: "/api/getData",
+    url: "/api/user",
     method: "get",
     response: () => {
       return {
-        status: 200,
+        code: 200,
         message: "success",
-        data: [],
-      };
-    },
-  },
-  //拦截获取商品的请求
-  {
-    url: "/api/goods",
-    method: "get",
-    response: () => {
-      return {
-        status: 200,
-        message: "success",
-        data: [],
+        data: [user],
       };
     },
   },

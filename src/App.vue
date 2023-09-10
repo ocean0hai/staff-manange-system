@@ -6,7 +6,9 @@
       <!-- <naive-provider>
         <router-view />
       </naive-provider> -->
-      <router-view />
+      <n-message-provider>
+        <router-view />
+      </n-message-provider>
     </n-config-provider>
   </div>
 </template>
