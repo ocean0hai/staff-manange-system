@@ -1,7 +1,9 @@
 import { defineStore } from "pinia"
-const loginStore=defineStore('loginStore',()=>{
-
+import { ref } from "vue"
+export const loginStore=defineStore('loginStore',()=>{
+    const isLogin=ref(false)
     async function getImg(){
+
      }
 
     return{

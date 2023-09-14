@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { MenuOption } from "naive-ui";
-import { h, Component } from "vue";
-import { ref } from "vue";
 import { NIcon } from "naive-ui";
+import GlobalLogo from "@/components/common/GlobalLogo.vue";
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
@@ -11,6 +10,11 @@ import {
   Journal,
   Notifications,
 } from "@vicons/ionicons5";
+import { useRoute, useRouter } from "vue-router";
+import { ref, watch, h, Component } from "vue";
+import { onMounted } from "vue";
+const router = useRouter();
+const route = useRoute();
 const collapsed = ref(false);
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) });
@@ -48,31 +52,47 @@ const menuOptions: MenuOption[] = [
     icon: renderIcon(Download),
   },
 ];
-
+const activeKey = ref("user");
+watch(activeKey, () => {
+  router.push({ path: activeKey.value });
+});
+onMounted(() => {
+  if (typeof route.name === "string") activeKey.value = route.name;
+});
 </script>
 
 <template>
   <n-space vertical>
-    <n-switch v-model:value="collapsed" />
     <n-layout has-sider>
       <n-layout-sider
         bordered
         collapse-mode="width"
         :collapsed-width="64"
-        :width="240"
+        :width="200"
         :collapsed="collapsed"
         show-trigger
         @collapse="collapsed = true"
         @expand="collapsed = false"
       >
+        <div class="overflow-x-hidden">
+          <GlobalLogo
+            :open="collapsed"
+            logosize="40px"
+            textcss="text-xl ml-2"
+          ></GlobalLogo>
+        </div>
         <n-menu
           :collapsed="collapsed"
+          v-model:value="activeKey"
           :collapsed-width="64"
-          :collapsed-icon-size="22"
+          :collapsed-icon-size="30"
           :options="menuOptions"
         />
       </n-layout-sider>
       <n-layout>
+        <div>
+          <n-switch v-model:value="collapsed" />
+        </div>
         <span><router-view></router-view></span>
       </n-layout>
     </n-layout>

@@ -1,11 +1,22 @@
-import { apitest } from "@/utils/request-code";
-export function login(data:any) {
-  apitest.post("/api/user/login", {
-    ...data,
-  });
+import { api } from "./request";
+export async function login(data: any) {
+  let isLogin = false;
+  await api
+    .post("/user/login", {
+      ...data,
+    })
+    .then(() => {
+      localStorage.removeItem("codetoken");
+      console.log('登录成功！！');
+      isLogin = true;
+    })
+    .catch((res) => {
+      console.log("登录失败！", res);
+    });
+  return isLogin;
 }
-export function register(data:any) {
-  apitest.post("/api/user/register", {
+export function register(data: any) {
+  api.post("/user/register", {
     ...data,
   });
 }

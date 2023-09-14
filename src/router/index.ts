@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 export const routes: RouteRecordRaw[] = [
   {
     path: "/",
-    redirect: "/admin", //重定向，当使用  "/  ",重新使用  "/home  "
+    redirect: "/login", //重定向，当使用  "/  ",重新使用  "/home  "
   },
   {
     path: "/login",
@@ -31,9 +31,19 @@ export const routes: RouteRecordRaw[] = [
         component: () => import("@/pages/admin/Download.vue"),
       },
       {
-        name: "download",
-        path: "download",
-        component: () => import("@/pages/admin/Download.vue"),
+        name: "notice",
+        path: "notice",
+        component: () => import("@/pages/admin/NoticeManage.vue"),
+      },
+      {
+        name: "position",
+        path: "position",
+        component: () => import("@/pages/admin/PositionManage.vue"),
+      },
+      {
+        name: "staff",
+        path: "staff",
+        component: () => import("@/pages/admin/StaffManage.vue"),
       },
     ],
   },

@@ -1,13 +1,12 @@
 <template>
   <n-form
-    ref="formRef"
     :model="model"
     :rules="rules"
     size="large"
     :show-label="false"
   >
     <n-form-item path="userName">
-      <n-input v-model:value="model.userName" />
+      <n-input v-model:value="model.username" />
     </n-form-item>
     <n-form-item path="password" label="密码">
       <n-input v-model:value="model.password" type="password" />
@@ -18,8 +17,8 @@
         <img
           class="w-28 h-16 ml-3"
           id="code"
-          :src="url"
-          @click="setCode"
+          :src="codeImg"
+          @click="setCodeImge"
           alt=""
         />
       </div>
@@ -46,13 +45,19 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { login } from "@/api/login";
-import type { FormInst } from "naive-ui";
-const url = ref("https://wowms.sszsj.com/api/user/codeImage");
-const code = ref();
-const formRef = ref<HTMLElement & FormInst>();
+import { onMounted } from "vue";
+import { api } from "@/api/request";
+import { useRouter } from "vue-router";
+onMounted(() => {
+  setCodeImge();
+});
+
+const codeImg = ref("");
+const router=useRouter()
+const code = ref("");
 const model = ref({
-  userName: "Soybean",
-  password: "soybean123",
+  username: "admin",
+  password: "114514",
   code: 0,
 });
 const rules = ref({
@@ -66,12 +71,21 @@ const rules = ref({
 });
 const rememberMe = ref(false);
 async function handleSubmit() {
-  model.value.code = Number(code);
-  login(model.value);
+  model.value.code = parseInt(code.value);
+ if (await login(model.value)) {
+   router.push({name:'user'}) 
+ } 
 }
-function setCode() {
+
+async function setCodeImge() {
   const num = new Date().getSeconds();
-  url.value = "https://wowms.sszsj.com/api/user/codeImage?data=" + num;
+  const res: any = await api.get("/user/codeImage?data=" + num, {
+    responseType: "arraybuffer",
+    headers: {
+      "Content-Type": "image/png",
+    },
+  });
+  codeImg.value = window.URL.createObjectURL(new Blob([res]));
 }
 </script>
 

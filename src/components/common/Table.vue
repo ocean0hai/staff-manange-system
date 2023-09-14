@@ -1,29 +1,80 @@
-<script lang="ts" setup>
-const {columns,data}=defineProps<{
-    columns:Array<any>,
-    data:any
-}>()
-
-</script>
 
 <template>
-  <n-table>
-    <thead>
-      <tr>
-         <th><input type="checkbox">全选</th>
-        <th v-for="(item,i) in columns" :key="i">
-          {{ item }}
-        </th>
-        <th>操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(item,i) in data" :key="i">
-        <td><input type="checkbox"></td>
-        <td v-for="(it,k) in item" :key="k">{{ it }}</td>
-        <td><slot></slot></td>
-      </tr>
-    </tbody>
-  </n-table>
+  <n-data-table
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+    :bordered="false"
+  />
 </template>
-<style scoped></style>
+
+<script lang="ts">
+import { h, defineComponent } from 'vue'
+import { NButton, useMessage } from 'naive-ui'
+import type { DataTableColumns } from 'naive-ui'
+
+type Song = {
+  no: number
+  title: string
+  length: string
+}
+
+const createColumns = ({
+  play
+}: {
+  play: (row: Song) => void
+}): DataTableColumns<Song> => {
+  return [
+    {
+      title: 'No',
+      key: 'no'
+    },
+    {
+      title: 'Title',
+      key: 'title'
+    },
+    {
+      title: 'Length',
+      key: 'length'
+    },
+    {
+      title: 'Action',
+      key: 'actions',
+      render (row) {
+        return h(
+          NButton,
+          {
+            strong: true,
+            tertiary: true,
+            size: 'small',
+            onClick: () => play(row)
+          },
+          { default: () => 'Play' }
+        )
+      }
+    }
+  ]
+}
+
+const data: Song[] = [
+  { no: 3, title: 'Wonderwall', length: '4:18' },
+  { no: 4, title: "Don't Look Back in Anger", length: '4:48' },
+  { no: 12, title: 'Champagne Supernova', length: '7:27' }
+]
+
+export default defineComponent({
+  setup () {
+    const message = useMessage()
+    return {
+      data,
+      columns: createColumns({
+        play (row: Song) {
+          message.info(`Play ${row.title}`)
+        }
+      }),
+      pagination: false as const
+    }
+  }
+})
+
+</script>
