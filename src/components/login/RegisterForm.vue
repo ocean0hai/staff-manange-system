@@ -2,6 +2,7 @@
 
 <template>
   <div>
+    注册
     <slot></slot>
   </div>
 </template>

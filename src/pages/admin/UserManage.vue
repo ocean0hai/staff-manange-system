@@ -23,41 +23,52 @@ const mothed = {
   deletePath: "/user/delete/",
 };
 // const columns = ref(["id", "用户名", "是否锁定", "身份"]);
-const { totalPages, currentPage, data, Add, Modify, deleteData } =
-  useOptionData<userType>(mothed);
+const {
+  currentPage,
+  currentPageSize,
+  totalPages,
+  totalPageSizes,
+  data,
+  addData,
+  getData,
+  Modify,
+  deleteData,
+  updatePage,
+  updatePageSize,
+} = useOptionData<userType>(mothed);
 
 const createColumns = (): DataTableColumns<userType> => {
   return [
     {
       title: "Id",
-      align:'center',
+      align: "center",
       key: "id",
     },
     {
       title: "用户名",
-      align:'center',
+      align: "center",
       key: "username",
     },
     {
       title: "是否锁定",
-      align:'center',
+      align: "center",
       key: "isLocked",
     },
     {
       title: "昵称",
-      align:'center',
+      align: "center",
       key: "nickName",
     },
     {
       title: "签名",
-      align:'center',
+      align: "center",
       key: "descr",
     },
     {
       title: "操作",
       width: 50,
-      titleColSpan:2,
-      align:'center',
+      titleColSpan: 2,
+      align: "center",
       key: "actions",
       render(row) {
         return h(
@@ -77,7 +88,7 @@ const createColumns = (): DataTableColumns<userType> => {
       width: 60,
       key: "actions",
       render(row) {
-        const {id}=row
+        const { id } = row;
         return h(
           NButton,
           {
@@ -90,34 +101,11 @@ const createColumns = (): DataTableColumns<userType> => {
           { default: () => "删除" }
         );
       },
-    }
+    },
   ];
 };
 const columns = createColumns();
 
-function changePage(id: number) {
-  //执行函数得到数据函数
-  currentPage.value = id;
-}
-const pageSizes = [
-  {
-    label: "10 每页",
-    value: 10,
-  },
-  {
-    label: "20 每页",
-    value: 20,
-  },
-  {
-    label: "30 每页",
-    value: 30,
-  },
-  {
-    label: "40 每页",
-    value: 40,
-  },
-];
-const pageSize = ref(20);
 const show = ref(false);
 const formData = ref([
   {
@@ -154,24 +142,27 @@ function changeShow(option: string, row?: any) {
   options.value = option;
   show.value = true;
 }
+
 function Submit(data: any) {
   if (options.value === "add") {
-    Add(data);
+    addData(data);
   } else {
     if (data.password === undefined) {
-      // Modify(data);
+      Modify(data);
     } else {
-      console.log(data);
       const { password, ...obj } = data;
-      // Modify(obj);
+      Modify(obj);
     }
-    itemdata.value={}
+    itemdata.value = {};
   }
+}
+async function searchData(value: string) {
+  await getData({ username: value });
 }
 </script>
 
 <template>
-  <div v-if="data?.length">
+  <div>
     <div v-if="show">
       <Form
         :form-data="formData"
@@ -180,7 +171,7 @@ function Submit(data: any) {
         v-model:model-value="show"
       ></Form>
     </div>
-    <Option @change-show="changeShow"></Option>
+    <Option @search-data="searchData" @change-show="changeShow"></Option>
     <n-data-table class="text-center" :columns="columns" :data="data" />
     <n-pagination
       show-quick-jumper
@@ -188,21 +179,12 @@ function Submit(data: any) {
       class="mx-auto"
       v-model:page="currentPage"
       :page-count="totalPages"
-      :on-update:page="
-        (id) => {
-          changePage(id);
-        }
-      "
-      v-model:page-size="pageSize"
-      :page-sizes="pageSizes"
-      :on-update:page-size="
-        (id) => {
-          changePage(id);
-        }
-      "
+      :on-update:page="updatePage"
+      v-model:page-size="currentPageSize"
+      :page-sizes="totalPageSizes"
+      :on-update:page-size="updatePageSize"
     />
   </div>
-  <div v-else>暂时没有数据</div>
 </template>
 
 <style scoped></style>

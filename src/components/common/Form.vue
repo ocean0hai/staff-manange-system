@@ -8,6 +8,7 @@ const { formData, edit } = defineProps<{
   formData: Array<any>;
   edit: objType;
 }>();
+
 const emit = defineEmits(["update:modelValue", "submitData"]);
 const showModel = ref(true);
 const inputValue = ref<objType>({ ...edit });

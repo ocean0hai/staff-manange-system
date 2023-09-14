@@ -9,8 +9,10 @@ interface ItypeAPI<T> {
   message:string,
 }
 //得到
-export async function Get<T>(path: string): Res<T> {
-  return await api.get(path);
+export async function Get<T>(path: string,params:any): Res<T> {
+  return await api.get(path,{
+    params:params
+  });
 }
 export function Post(path: string, data: any) {
   return api.post(path, data);

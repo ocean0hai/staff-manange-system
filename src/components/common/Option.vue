@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { Icon } from "@iconify/vue";
-const emit = defineEmits(["changeShow"]);
+import { ref } from "vue";
+const emit = defineEmits(["changeShow", "searchData"]);
+const search = ref("");
 </script>
 
 <template>
@@ -18,15 +20,29 @@ const emit = defineEmits(["changeShow"]);
           <Icon class="mr-1" icon="gala:add" />
           新增
         </n-button>
-        <n-button type="error">
-          <Icon icon="mi:delete" />
-          删除
-        </n-button>
       </n-space>
       <n-space>
         <n-input-group>
-          <n-input type="text" placeholder="请输入关键字" clearable> </n-input>
-          <n-button ghost>
+          <n-input
+            type="text"
+            v-model:value="search"
+            @blur="
+              () => {
+                emit('searchData', search);
+              }
+            "
+            placeholder="请输入关键字"
+            clearable
+          >
+          </n-input>
+          <n-button
+            @click="
+              () => {
+                emit('searchData', search);
+              }
+            "
+            ghost
+          >
             <Icon class="text-2xl" icon="mdi:search" />
           </n-button>
         </n-input-group>

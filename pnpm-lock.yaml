@@ -17,6 +17,7 @@ specifiers:
   vite-plugin-mock: ^3.0.0
   vite-plugin-svg-icons: ^2.0.1
   vue: ^3.3.4
+  vue-media-recorder: ^0.1.25
   vue-router: ^4.2.4
   vue-tsc: ^1.8.5
 
@@ -28,6 +29,7 @@ dependencies:
   path: registry.npmmirror.com/path/0.12.7
   pinia: registry.npmmirror.com/pinia/2.1.6_typescript@5.2.2+vue@3.3.4
   vue: registry.npmmirror.com/vue/3.3.4
+  vue-media-recorder: registry.npmmirror.com/vue-media-recorder/0.1.25
   vue-router: registry.npmmirror.com/vue-router/4.2.4_vue@3.3.4
 
 devDependencies:
@@ -858,6 +860,16 @@ packages:
       '@vue/compiler-core': registry.npmmirror.com/@vue/compiler-core/3.3.4
       '@vue/shared': registry.npmmirror.com/@vue/shared/3.3.4
 
+  registry.npmmirror.com/@vue/compiler-sfc/2.7.14:
+    resolution: {integrity: sha512-aNmNHyLPsw+sVvlQFQ2/8sjNuLtK54TC6cuKnVzAY93ks4ZBrvwQSnkkIh7bsbNhum5hJBS00wSDipQ937f5DA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vue/compiler-sfc/-/compiler-sfc-2.7.14.tgz}
+    name: '@vue/compiler-sfc'
+    version: 2.7.14
+    dependencies:
+      '@babel/parser': registry.npmmirror.com/@babel/parser/7.22.16
+      postcss: registry.npmmirror.com/postcss/8.4.29
+      source-map: registry.npmmirror.com/source-map/0.6.1
+    dev: false
+
   registry.npmmirror.com/@vue/compiler-sfc/3.3.4:
     resolution: {integrity: sha512-6y/d8uw+5TkCuzBkgLS0v3lSM3hJDntFEiUORM11pQ/hKvkhSKZrXW6i69UyXlJQisJxuUEJKAWEqWbWsLeNKQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vue/compiler-sfc/-/compiler-sfc-3.3.4.tgz}
     name: '@vue/compiler-sfc'
@@ -1314,6 +1326,14 @@ packages:
     version: 0.1.1
     engines: {node: '>=0.10.0'}
     dev: true
+
+  registry.npmmirror.com/core-js/2.6.12:
+    resolution: {integrity: sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/core-js/-/core-js-2.6.12.tgz}
+    name: core-js
+    version: 2.6.12
+    deprecated: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
+    requiresBuild: true
+    dev: false
 
   registry.npmmirror.com/cors/2.8.5:
     resolution: {integrity: sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cors/-/cors-2.8.5.tgz}
@@ -2934,6 +2954,12 @@ packages:
       safe-regex: registry.npmmirror.com/safe-regex/1.1.0
     dev: true
 
+  registry.npmmirror.com/register-service-worker/1.7.2:
+    resolution: {integrity: sha512-CiD3ZSanZqcMPRhtfct5K9f7i3OLCcBBWsJjLh1gW9RO/nS94sVzY59iS+fgYBOBqaBpf4EzfqUF3j9IG+xo8A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/register-service-worker/-/register-service-worker-1.7.2.tgz}
+    name: register-service-worker
+    version: 1.7.2
+    dev: false
+
   registry.npmmirror.com/repeat-element/1.1.4:
     resolution: {integrity: sha512-LFiNfRcSu7KK3evMyYOuCzv3L10TW7yC1G2/+StMjK8Y6Vqd2MG7r/Qjw4ghtuCOjFvlnms/iMmLqpvW/ES/WQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/repeat-element/-/repeat-element-1.1.4.tgz}
     name: repeat-element
@@ -3138,7 +3164,6 @@ packages:
     name: source-map
     version: 0.6.1
     engines: {node: '>=0.10.0'}
-    dev: true
 
   registry.npmmirror.com/split-string/3.1.0:
     resolution: {integrity: sha512-NzNVhJDYpwceVVii8/Hu6DKfD2G+NrQHlS/V/qgv763EYudVwEcMQNxd2lh+0VrUByXN/oJkl5grOhYWvQUYiw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/split-string/-/split-string-3.1.0.tgz}
@@ -3592,6 +3617,29 @@ packages:
       vue: registry.npmmirror.com/vue/3.3.4
     dev: false
 
+  registry.npmmirror.com/vue-media-recorder/0.1.25:
+    resolution: {integrity: sha512-5rrml+FeVgbBdv2x/3WqrNaD9QTq7O9ZugXjbN7DQtvUCzyZo4s9Fvze2QmMmEY0I+KcwQb1Eq5mp6Jn4rD23g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-media-recorder/-/vue-media-recorder-0.1.25.tgz}
+    name: vue-media-recorder
+    version: 0.1.25
+    dependencies:
+      core-js: registry.npmmirror.com/core-js/2.6.12
+      register-service-worker: registry.npmmirror.com/register-service-worker/1.7.2
+      vue: registry.npmmirror.com/vue/2.7.14
+      vue-router: registry.npmmirror.com/vue-router/3.6.5_vue@2.7.14
+      vuex: registry.npmmirror.com/vuex/3.6.2_vue@2.7.14
+    dev: false
+
+  registry.npmmirror.com/vue-router/3.6.5_vue@2.7.14:
+    resolution: {integrity: sha512-VYXZQLtjuvKxxcshuRAwjHnciqZVoXAjTjcqBTz4rKc8qih9g9pI3hbDjmqXaHdgL3v8pV6P8Z335XvHzESxLQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-router/-/vue-router-3.6.5.tgz}
+    id: registry.npmmirror.com/vue-router/3.6.5
+    name: vue-router
+    version: 3.6.5
+    peerDependencies:
+      vue: ^2
+    dependencies:
+      vue: registry.npmmirror.com/vue/2.7.14
+    dev: false
+
   registry.npmmirror.com/vue-router/4.2.4_vue@3.3.4:
     resolution: {integrity: sha512-9PISkmaCO02OzPVOMq2w82ilty6+xJmQrarYZDkjZBfl4RvYAlt4PKnEX21oW4KTtWfa9OuO/b3qk1Od3AEdCQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-router/-/vue-router-4.2.4.tgz}
     id: registry.npmmirror.com/vue-router/4.2.4
@@ -3628,6 +3676,15 @@ packages:
       typescript: registry.npmmirror.com/typescript/5.2.2
     dev: true
 
+  registry.npmmirror.com/vue/2.7.14:
+    resolution: {integrity: sha512-b2qkFyOM0kwqWFuQmgd4o+uHGU7T+2z3T+WQp8UBjADfEv2n4FEMffzBmCKNP0IGzOEEfYjvtcC62xaSKeQDrQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue/-/vue-2.7.14.tgz}
+    name: vue
+    version: 2.7.14
+    dependencies:
+      '@vue/compiler-sfc': registry.npmmirror.com/@vue/compiler-sfc/2.7.14
+      csstype: registry.npmmirror.com/csstype/3.1.2
+    dev: false
+
   registry.npmmirror.com/vue/3.3.4:
     resolution: {integrity: sha512-VTyEYn3yvIeY1Py0WaYGZsXnz3y5UnGi62GjVEqvEGPl6nxbOrCXbVOTQWBEJUqAyTUk2uJ5JLVnYJ6ZzGbrSw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue/-/vue-3.3.4.tgz}
     name: vue
@@ -3656,6 +3713,17 @@ packages:
       vooks: registry.npmmirror.com/vooks/0.2.12_vue@3.3.4
       vue: registry.npmmirror.com/vue/3.3.4
     dev: true
+
+  registry.npmmirror.com/vuex/3.6.2_vue@2.7.14:
+    resolution: {integrity: sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vuex/-/vuex-3.6.2.tgz}
+    id: registry.npmmirror.com/vuex/3.6.2
+    name: vuex
+    version: 3.6.2
+    peerDependencies:
+      vue: ^2.0.0
+    dependencies:
+      vue: registry.npmmirror.com/vue/2.7.14
+    dev: false
 
   registry.npmmirror.com/which/2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/which/-/which-2.0.2.tgz}
