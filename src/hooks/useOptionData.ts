@@ -47,8 +47,6 @@ export function useOptionData<T>(mothed: mothedType) {
         size: currentPageSize.value,
       };
       const res = await Get<dataType<T>>(mothed.getPath, params);
-      console.log(res);
-      
       if (res.code === 200 && res.data?.records !== undefined) {
         const { total, records, pages } = res.data;
         dataTotal.value = total;
@@ -85,7 +83,6 @@ export function useOptionData<T>(mothed: mothedType) {
   }
   async function addData(params: any) {
     try {
-      console.log(params);
       const res: any = await Post(mothed.postPath, params);
       if (res.code === 200) {
         message.success("添加成功！！");

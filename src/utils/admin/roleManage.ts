@@ -61,7 +61,7 @@ export function roleManage(
               tertiary: true,
               type: "info",
               size: "small",
-              onClick: () => changeShow('',row),
+              onClick: () => changeShow("", row),
             },
             { default: () => "编辑" }
           );
@@ -111,10 +111,7 @@ export function roleManage(
     if (option === "add") {
       itemdata.value = { ...item };
     } else {
-      for (let key in item) {
-        itemdata.value[key] = row[key];
-      }
-      console.log(itemdata.value);
+      itemdata.value = { ...row };
     }
     options.value = option;
     show.value = true;
@@ -124,7 +121,7 @@ export function roleManage(
     if (options.value === "add") {
       await addData(arr);
     } else {
-     await Modify(arr);
+      await Modify(arr);
     }
   }
   async function searchData(value: string) {

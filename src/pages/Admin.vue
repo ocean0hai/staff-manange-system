@@ -13,13 +13,13 @@ import {
 import { useRoute, useRouter } from "vue-router";
 import { ref, watch, h, Component } from "vue";
 import { onMounted } from "vue";
+import Header from "@/components/common/Header.vue";
 const router = useRouter();
 const route = useRoute();
 const collapsed = ref(false);
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) });
 }
-
 const menuOptions: MenuOption[] = [
   {
     label: "用户管理",
@@ -30,7 +30,8 @@ const menuOptions: MenuOption[] = [
     label: "用户角色管理",
     key: "userrole",
     icon: renderIcon(PersonIcon),
-  },{
+  },
+  {
     label: "角色权限管理",
     key: "roleAuthority",
     icon: renderIcon(PersonIcon),
@@ -104,8 +105,9 @@ onMounted(() => {
         />
       </n-layout-sider>
       <n-layout>
-        <div>
-          <n-switch v-model:value="collapsed" />
+        <div class="h-11 py-4 flex justify-between">
+          <n-switch class="py-2 pl-4" size="large" v-model:value="collapsed" />
+          <Header></Header>
         </div>
         <span><router-view></router-view></span>
       </n-layout>

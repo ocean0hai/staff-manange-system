@@ -112,7 +112,7 @@ export function depManage(
   const itemdata = ref<objType>({});
   const options = ref("");
   function changeShow(option: string, row?: any) {
-    console.log('fsafa');
+    console.log("fsafa");
     const item = {
       name: "",
       remark: "",
@@ -122,9 +122,7 @@ export function depManage(
     if (option === "add") {
       itemdata.value = { ...item };
     } else {
-      for (let key in item) {
-        itemdata.value[key] = row[key];
-      }
+      itemdata.value = { ...row };
     }
     options.value = option;
     show.value = true;

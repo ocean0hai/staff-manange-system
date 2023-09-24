@@ -44,35 +44,5 @@ async function submitData(file: any) {
       console.log(err);
     });
 }
-// 将 Base64 字符串转换为 File 对象
-function base64ToFile(base64String: string, fileName = "image.png") {
-  // 将 Base64 字符串转换为字节数组
-  const byteCharacters = atob(base64String.split(",")[1]);
-
-  // 创建一个空的 Uint8Array
-  const byteNumbers = new Uint8Array(byteCharacters.length);
-
-  // 将字节填充到 Uint8Array 中
-  for (let i = 0; i < byteCharacters.length; i++) {
-    byteNumbers[i] = byteCharacters.charCodeAt(i);
-  }
-  // 创建一个 Blob 对象
-  const blob = new Blob([byteNumbers], { type: "image/png" });
-  // 这里的 MIME 类型要与你的 Base64 字符串对应的图片类型相匹配
-  // 创建一个 File 对象
-  const file = new File([blob], fileName, { type: blob.type });
-  //保存图片到本地
-  return {
-    file: file,
-    blob: blob,
-  };
-}
-// function downloadFile(file: any) {
-//   const fileName = "image.png";
-//   const link = document.createElement("a");
-//   link.href = URL.createObjectURL(file);
-//   link.download = fileName;
-//   link.click();
-// }
 </script>
 <style scoped></style>

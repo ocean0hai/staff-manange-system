@@ -4,7 +4,7 @@ import Form from "@/components/common/Form.vue";
 import { useOptionData } from "@/hooks/useOptionData";
 import { userType } from "@/type/admin";
 import { userManage } from "@/utils";
-
+import FaceImg from '@/components/common/FaceImg.vue'
 const mothed = {
   getPath: "/user/getAll",
   postPath: "/user/register",
@@ -24,8 +24,17 @@ const {
   updatePage,
   updatePageSize,
 } = useOptionData<userType>(mothed);
-const { show, itemdata, columns, formData, changeShow, searchData, Submit } =
-  userManage(addData, deleteData, Modify, getData);
+const {
+  show,
+  showimg,
+  itemdata,
+  columns,
+  formData,
+  uploadFile,
+  changeShow,
+  searchData,
+  Submit,
+} = userManage(addData, deleteData, Modify, getData);
 </script>
 
 <template>
@@ -36,7 +45,17 @@ const { show, itemdata, columns, formData, changeShow, searchData, Submit } =
         :edit="itemdata"
         @submit-data="Submit"
         v-model:model-value="show"
-      ></Form>
+      >
+        <div v-if="showimg">
+          <face-img @get-img="uploadFile"></face-img>
+        </div>
+        <div class="flex justify-around">
+          <n-upload @change="uploadFile">
+            <n-button>上传文件</n-button>
+          </n-upload>
+          <n-button type="info" @click="showimg = true">拍照上传</n-button>
+        </div>
+      </Form>
     </div>
     <Option @search-data="searchData" @add-show="changeShow"></Option>
     <n-data-table class="text-center" :columns="columns" :data="data" />
