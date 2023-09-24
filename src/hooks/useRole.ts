@@ -1,6 +1,6 @@
 import { ref } from "vue";
-import { Delete, Get, Post, Put } from "@/api/mothed";
 import { useMessage } from "naive-ui";
+import { Delete, Get } from "@/api/mothed";
 interface mothedType {
   getPath: string;
   postPath: string;
@@ -14,8 +14,8 @@ interface dataType<T> {
   size: number;
   total: number;
 }
-export function useOptionData<T>(mothed: mothedType) {
-  const message = useMessage();
+export function useRole<T>(){
+    const message = useMessage();
   const data = ref<T[]>();
   const currentPage = ref<number>(1); //当前页
   const currentPageSize = ref<number>(10); //当前每10条数据
@@ -47,14 +47,10 @@ export function useOptionData<T>(mothed: mothedType) {
         size: currentPageSize.value,
       };
       const res = await Get<dataType<T>>(mothed.getPath, params);
-      console.log(res);
-      
-      if (res.code === 200 && res.data?.records !== undefined) {
-        const { total, records, pages } = res.data;
-        dataTotal.value = total;
-        totalPages.value = pages;
-        data.value = [...records];
-      }
+      const { total, records, pages } = res.data;
+      dataTotal.value = total;
+      totalPages.value = pages;
+      data.value = [...records];
     } catch (err) {
       console.log(err);
     }
@@ -69,41 +65,9 @@ export function useOptionData<T>(mothed: mothedType) {
     } catch (error) {
       console.log(error);
     }
-  }
-  async function Modify(params: any) {
-    try {
-      const res: any = await Put(mothed.putPath, params);
-      if (res.code === 200) {
-        message.success("修改成功！");
-        await getData();
-      } else {
-        console.log(res);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  async function addData(params: any) {
-    try {
-      console.log(params);
-      const res: any = await Post(mothed.postPath, params);
-      if (res.code === 200) {
-        message.success("添加成功！！");
-        await getData();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  async function updatePage(id: number) {
-    //执行函数得到数据函数
-    currentPage.value = id;
-    await getData();
-  }
-  async function updatePageSize(id: number) {
-    currentPageSize.value = id;
-    currentPage.value = 1;
-    await getData();
+  } 
+  async function Add() {
+    
   }
   return {
     data,
@@ -113,10 +77,5 @@ export function useOptionData<T>(mothed: mothedType) {
     dataTotal,
     totalPageSizes,
     getData,
-    deleteData,
-    Modify,
-    updatePage,
-    updatePageSize,
-    addData,
-  };
+  }
 }

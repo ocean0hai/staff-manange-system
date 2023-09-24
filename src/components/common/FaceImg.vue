@@ -5,7 +5,8 @@ import { ref } from "vue";
 const video = ref();
 const canvas = ref();
 const test = ref();
-const emit = defineEmits(["getImg"]);
+const emit = defineEmits(["getImg", "cancel"]);
+
 onMounted(async () => {
   // 调用摄像头
   await navigator.mediaDevices
@@ -26,9 +27,12 @@ async function takePhoto() {
   canvas
     .getContext("2d")
     ?.drawImage(video.value, 0, 0, canvas.width, canvas.height);
-  const base64 = canvas.toDataURL("image/png");
-  console.log(base64);
-  emit("getImg", base64);
+  canvas.toBlob((res) => {
+    if (res !== null) {
+      const file = new File([res], "image.png", { type: "image/png" });
+      emit("getImg", file);
+    }
+  });
   clearVideo();
   // 保存图片，可以使用 axios 等库发送请求将图片上传到后台服务器
 }
@@ -37,9 +41,6 @@ onUnmounted(() => {
 });
 const clearVideo = () => {
   // 关闭摄像头
-  console.log(test.value);
-
-  console.log(video.value?.srcObject);
   if (video.value?.srcObject !== undefined) {
     const stream = video.value.srcObject;
     const tracks = stream.getTracks();
@@ -55,13 +56,19 @@ const clearVideo = () => {
     });
     test.value = null;
   }
+  emit("cancel");
+  show.value = false;
 };
+const show = ref(true);
 </script>
 <template>
-  <div>
-    <div class="text-center">
+  <div v-if="show">
+    <div class="text-center box">
       <video ref="video" autoplay class="w-90 h-70"></video>
-      <n-button type="info" @click="takePhoto">拍照</n-button>
+      <span>
+        <n-button class="mx-1" type="info" @click="takePhoto">拍照</n-button>
+        <n-button class="mx-1" type="info" @click="clearVideo">取消</n-button>
+      </span>
     </div>
     <canvas ref="canvas" style="display: none"></canvas>
   </div>

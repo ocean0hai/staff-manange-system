@@ -1,10 +1,5 @@
 <template>
-  <n-form
-    :model="model"
-    :rules="rules"
-    size="large"
-    :show-label="false"
-  >
+  <n-form :model="model" :rules="rules" size="large" :show-label="false">
     <n-form-item path="userName">
       <n-input v-model:value="model.username" />
     </n-form-item>
@@ -48,12 +43,11 @@ import { login } from "@/api/login";
 import { onMounted } from "vue";
 import { api } from "@/api/request";
 import { useRouter } from "vue-router";
-onMounted(() => {
-  setCodeImge();
-});
+import { useMessage } from "naive-ui";
 
+const router = useRouter();
+const message = useMessage();
 const codeImg = ref("");
-const router=useRouter()
 const code = ref("");
 const model = ref({
   username: "admin",
@@ -70,11 +64,18 @@ const rules = ref({
   },
 });
 const rememberMe = ref(false);
+onMounted(() => {
+  setCodeImge();
+});
 async function handleSubmit() {
   model.value.code = parseInt(code.value);
- if (await login(model.value)) {
-   router.push({name:'user'}) 
- } 
+  const str = await login(model.value);
+  if (str === "1") {
+    message.success("登录成功！");
+    router.push({ name: "user" });
+  } else {
+    message.error(str);
+  }
 }
 
 async function setCodeImge() {

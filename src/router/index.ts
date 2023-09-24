@@ -45,6 +45,21 @@ export const routes: RouteRecordRaw[] = [
         path: "staff",
         component: () => import("@/pages/admin/StaffManage.vue"),
       },
+      {
+        name: "roleManage",
+        path: "roleManage",
+        component: () => import("@/pages/admin/RoleManage.vue"),
+      },
+      {
+        name: "roleAuthority",
+        path: "roleAuthority",
+        component: () => import("@/pages/admin/RoleAuthority.vue"),
+      },
+      {
+        name: "userrole",
+        path: "userrole",
+        component: () => import("@/pages/admin/UserRole.vue"),
+      },
     ],
   },
   {

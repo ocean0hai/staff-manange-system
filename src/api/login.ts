@@ -1,19 +1,24 @@
 import { api } from "./request";
 export async function login(data: any) {
-  let isLogin = false;
+  let str = "";
   await api
     .post("/user/login", {
       ...data,
     })
-    .then(() => {
-      localStorage.removeItem("codetoken");
-      console.log('登录成功！！');
-      isLogin = true;
-    })
-    .catch((res) => {
-      console.log("登录失败！", res);
+    .then((res: any) => {
+      switch (res.code) {
+        case 200: {
+          str = "1";
+          localStorage.removeItem("codetoken");
+          console.log(res.message);
+          break;
+        }
+        default: {
+          str=res.message
+        }
+      }
     });
-  return isLogin;
+  return str
 }
 export function register(data: any) {
   api.post("/user/register", {

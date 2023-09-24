@@ -10,9 +10,9 @@ api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
     const codetoken = localStorage.getItem("codetoken");
-    if (codetoken) {
+    if (codetoken !== null) {
       config.headers.codetoken = codetoken;
-    } else {
+    } else if (token !== null) {
       config.headers.token = token;
     }
     return config;

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Icon } from "@iconify/vue";
 import { ref } from "vue";
-const emit = defineEmits(["changeShow", "searchData"]);
+const emit = defineEmits(["addShow", "searchData"]);
 const search = ref("");
 </script>
 
@@ -13,7 +13,7 @@ const search = ref("");
           type="primary"
           @click="
             () => {
-              emit('changeShow', 'add');
+              emit('addShow', 'add');
             }
           "
         >
@@ -26,7 +26,7 @@ const search = ref("");
           <n-input
             type="text"
             v-model:value="search"
-            @blur="
+            @keyup.enter="
               () => {
                 emit('searchData', search);
               }

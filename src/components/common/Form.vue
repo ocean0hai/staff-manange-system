@@ -6,7 +6,7 @@ interface objType {
 }
 const { formData, edit } = defineProps<{
   formData: Array<any>;
-  edit: objType;
+  edit?: objType;
 }>();
 
 const emit = defineEmits(["update:modelValue", "submitData"]);
@@ -67,11 +67,11 @@ function onPositiveClick(option: string) {
             "
           />
         </n-form-item>
+        <slot>
+
+        </slot>
       </n-form>
     </div>
-    <!-- <template #action>
-        <div>操作</div>
-      </template> -->
   </n-modal>
 </template>
 

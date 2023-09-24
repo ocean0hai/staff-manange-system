@@ -27,6 +27,20 @@ const menuOptions: MenuOption[] = [
     icon: renderIcon(PersonIcon),
   },
   {
+    label: "用户角色管理",
+    key: "userrole",
+    icon: renderIcon(PersonIcon),
+  },{
+    label: "角色权限管理",
+    key: "roleAuthority",
+    icon: renderIcon(PersonIcon),
+  },
+  {
+    label: "角色信息管理",
+    key: "roleManage",
+    icon: renderIcon(PersonIcon),
+  },
+  {
     label: "部门管理",
     key: "department",
     icon: renderIcon(BookIcon),

@@ -2,13 +2,14 @@
 import Option from "@/components/common/Option.vue";
 import Form from "@/components/common/Form.vue";
 import { useOptionData } from "@/hooks/useOptionData";
-import { noticeType } from "@/type/admin";
-import { noticeManage } from "@/utils";
+import {roleManage  } from "@/utils";
+import {roleType} from "@/type/admin"
+import { onMounted } from "vue";
 const mothed = {
-  getPath: "/noticeInf/getAll",
-  postPath: "/noticeInf/inserts",
-  putPath: "/noticeInf/updates",
-  deletePath: "/noticeInf/deletes/",
+  getPath: "/role/getAll",
+  postPath: "/role/inserts",
+  putPath: "/role/updates",
+  deletePath: "/role/deletes/",
 };
 const {
   totalPages,
@@ -22,9 +23,12 @@ const {
   deleteData,
   updatePage,
   updatePageSize,
-} = useOptionData<noticeType>(mothed);
+} = useOptionData<roleType>(mothed);
+onMounted(async()=>{
+  await getData() 
+})
 const { show, itemdata, columns, formData, changeShow, searchData, Submit } =
-  noticeManage(addData, deleteData, Modify, getData);
+  roleManage( addData,deleteData,Modify, getData);
 </script>
 
 <template>
